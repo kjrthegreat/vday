@@ -14,38 +14,35 @@
 </head>
 <body>
 
-  <div class="bg-sparkles"></div>
+  <div class="bg-sparkles" aria-hidden="true"></div>
 
   <main class="page">
     <section class="card">
 
       <header class="header fade-in" id="intro">
-        <h1 class="title">
-          Paige, you make my world brighter every single day.
-        </h1>
-        <p class="subtitle">
-          I made you something small… but it means a lot to me.
-        </p>
+        <p class="eyebrow">Valentine’s Day</p>
+        <h1 class="title">Paige, you make my world brighter every single day.</h1>
+        <p class="subtitle">I made you a tiny website… because you deserve cute things.</p>
       </header>
 
-      <section class="question fade-in" id="questionBlock">
+      <section class="question fade-in" id="questionBlock" aria-live="polite">
         <h2 class="question-title">Will you be my Valentine?</h2>
 
-        <div class="buttons">
-          <button class="btn btn-primary" id="yesBtn">Yes 💗</button>
-          <button class="btn btn-ghost" id="noBtn">No 🙈</button>
+        <div class="buttons" id="buttons">
+          <button class="btn btn-primary" id="yesBtn" type="button">Yes 💗</button>
+          <button class="btn btn-ghost" id="noBtn" type="button">No 🙈</button>
         </div>
+
+        <p class="tiny-note" id="tinyNote">Be honest… but also choose wisely 😅</p>
       </section>
 
-      <!-- Reveal Section -->
+      <!-- Reveal after Yes -->
       <section class="reveal" id="reveal" hidden>
-
         <div class="flower-wrap">
 
-          <svg class="flower" viewBox="0 0 600 600">
-
+          <svg class="flower" viewBox="0 0 600 600" role="img" aria-label="A hand-drawn flower">
             <defs>
-              <filter id="softGlow">
+              <filter id="softGlow" x="-50%" y="-50%" width="200%" height="200%">
                 <feGaussianBlur stdDeviation="3" result="blur"/>
                 <feMerge>
                   <feMergeNode in="blur"/>
@@ -55,55 +52,56 @@
             </defs>
 
             <!-- Stem -->
-            <path class="stroke stem"
-              d="M300 540 C295 480, 305 430, 300 380
-                 C292 305, 250 270, 230 240"
-              fill="none" stroke-linecap="round"/>
+            <path class="stroke stem" d="M300 540 C295 480, 305 430, 300 380 C292 305, 250 270, 230 240"
+                  fill="none" stroke-linecap="round" />
 
             <!-- Leaves -->
-            <path class="stroke leaf"
-              d="M285 430 C250 420, 225 400, 210 370
-                 C245 370, 275 392, 292 412"
-              fill="none" stroke-linecap="round"/>
+            <path class="stroke leaf" d="M285 430 C250 420, 225 400, 210 370 C245 370, 275 392, 292 412"
+                  fill="none" stroke-linecap="round" />
+            <path class="stroke leaf" d="M315 455 C355 448, 388 425, 410 392 C372 392, 340 415, 315 438"
+                  fill="none" stroke-linecap="round" />
 
-            <path class="stroke leaf"
-              d="M315 455 C355 448, 388 425, 410 392
-                 C372 392, 340 415, 315 438"
-              fill="none" stroke-linecap="round"/>
-
-            <!-- Petals -->
+            <!-- Rose-ish bloom -->
             <path class="stroke petal"
-              d="M300 210
-                 C270 190, 240 200, 232 230
-                 C222 270, 260 295, 300 285
-                 C340 295, 378 270, 368 230
-                 C360 200, 330 190, 300 210 Z"
-              fill="none"/>
+                  d="M300 210
+                     C270 190, 240 200, 232 230
+                     C222 270, 260 295, 300 285
+                     C340 295, 378 270, 368 230
+                     C360 200, 330 190, 300 210 Z"
+                  fill="none" stroke-linejoin="round" />
 
             <path class="stroke petal"
-              d="M300 235
-                 C285 222, 262 226, 255 245
-                 C245 275, 275 290, 300 280
-                 C325 290, 355 275, 345 245
-                 C338 226, 315 222, 300 235 Z"
-              fill="none"/>
+                  d="M300 235
+                     C285 222, 262 226, 255 245
+                     C245 275, 275 290, 300 280
+                     C325 290, 355 275, 345 245
+                     C338 226, 315 222, 300 235 Z"
+                  fill="none" stroke-linejoin="round" />
 
             <path class="stroke petal"
-              d="M300 255
-                 C292 248, 280 250, 276 260
-                 C270 278, 286 290, 300 286
-                 C314 290, 330 278, 324 260
-                 C320 250, 308 248, 300 255 Z"
-              fill="none"/>
+                  d="M300 255
+                     C292 248, 280 250, 276 260
+                     C270 278, 286 290, 300 286
+                     C314 290, 330 278, 324 260
+                     C320 250, 308 248, 300 255 Z"
+                  fill="none" stroke-linejoin="round" />
 
-            <!-- Hidden curved message path -->
+            <!-- Tiny center swirl -->
+            <path class="stroke center"
+                  d="M300 270
+                     C292 268, 287 262, 289 255
+                     C291 246, 305 243, 312 251
+                     C319 259, 311 269, 300 270"
+                  fill="none" stroke-linecap="round" />
+
+            <!-- Hidden message path (curved across the bloom) - widened to prevent clipping -->
             <path id="secretPath"
-              d="M220 315 C260 285, 340 285, 380 315"
-              fill="none"/>
+              d="M215 270 C260 235, 340 235, 385 270"
+              fill="none" />
 
-            <!-- Hidden text -->
-            <text class="secret-text">
-              <textPath href="#secretPath" startOffset="50%" text-anchor="middle">
+            <!-- Hidden message text (reveals on click) -->
+            <text class="secret-text" aria-hidden="true">
+              <textPath href="#secretPath" startOffset="52%" text-anchor="middle">
                 Paige, I love you ❤️
               </textPath>
             </text>
@@ -111,21 +109,18 @@
           </svg>
 
           <div class="message">
-            <h3>You just made me the happiest person alive ❤️</h3>
-            <p>Happy Valentine’s Day, Paige.</p>
+            <h3 class="final-title">You just made me the happiest person alive ❤️</h3>
+            <p class="final-sub">Happy Valentine’s Day, Paige.</p>
             <p class="hint">(Tap the flower 🌸)</p>
           </div>
-
         </div>
-
       </section>
 
     </section>
   </main>
 
-  <div id="heartsLayer" class="hearts-layer"></div>
+  <div id="heartsLayer" class="hearts-layer" aria-hidden="true"></div>
 
   <script src="script.js"></script>
 </body>
 </html>
-

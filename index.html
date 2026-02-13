@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Kyle 💘 Paige | Valentine</title>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <!-- Subtle floating background -->
+  <div class="bg-sparkles" aria-hidden="true"></div>
+
+  <main class="page">
+    <section class="card" id="card">
+      <div class="top-accent" aria-hidden="true"></div>
+
+      <header class="header fade-in" id="intro">
+        <p class="eyebrow">Valentine’s Day</p>
+        <h1 class="title">Paige, you make my world brighter every single day.</h1>
+        <p class="subtitle">I made you a tiny little website… because you deserve cute things.</p>
+      </header>
+
+      <section class="question fade-in" id="questionBlock" aria-live="polite">
+        <h2 class="question-title">Will you be my Valentine?</h2>
+
+        <div class="buttons" id="buttons">
+          <button class="btn btn-primary" id="yesBtn" type="button">
+            Yes 💗
+          </button>
+
+          <button class="btn btn-ghost" id="noBtn" type="button">
+            No 🙈
+          </button>
+        </div>
+
+        <p class="tiny-note" id="tinyNote">Be honest… but also choose wisely 😅</p>
+      </section>
+
+      <!-- Reveal after Yes -->
+      <section class="reveal" id="reveal" hidden>
+        <div class="flower-wrap">
+          <!-- SVG flower drawing -->
+          <svg class="flower" viewBox="0 0 600 600" role="img" aria-label="A hand-drawn flower">
+            <defs>
+              <filter id="softGlow" x="-50%" y="-50%" width="200%" height="200%">
+                <feGaussianBlur stdDeviation="3" result="blur"/>
+                <feMerge>
+                  <feMergeNode in="blur"/>
+                  <feMergeNode in="SourceGraphic"/>
+                </feMerge>
+              </filter>
+            </defs>
+
+            <!-- Stem -->
+            <path class="stroke stem" d="M300 540 C295 480, 305 430, 300 380 C292 305, 250 270, 230 240"
+                  fill="none" stroke-linecap="round" />
+
+            <!-- Leaves -->
+            <path class="stroke leaf" d="M285 430 C250 420, 225 400, 210 370 C245 370, 275 392, 292 412"
+                  fill="none" stroke-linecap="round" />
+            <path class="stroke leaf" d="M315 455 C355 448, 388 425, 410 392 C372 392, 340 415, 315 438"
+                  fill="none" stroke-linecap="round" />
+
+            <!-- Rose-ish bloom (looped petals) -->
+            <path class="stroke petal"
+                  d="M300 210
+                     C270 190, 240 200, 232 230
+                     C222 270, 260 295, 300 285
+                     C340 295, 378 270, 368 230
+                     C360 200, 330 190, 300 210 Z"
+                  fill="none" stroke-linejoin="round" />
+
+            <path class="stroke petal"
+                  d="M300 235
+                     C285 222, 262 226, 255 245
+                     C245 275, 275 290, 300 280
+                     C325 290, 355 275, 345 245
+                     C338 226, 315 222, 300 235 Z"
+                  fill="none" stroke-linejoin="round" />
+
+            <path class="stroke petal"
+                  d="M300 255
+                     C292 248, 280 250, 276 260
+                     C270 278, 286 290, 300 286
+                     C314 290, 330 278, 324 260
+                     C320 250, 308 248, 300 255 Z"
+                  fill="none" stroke-linejoin="round" />
+
+            <!-- Tiny center swirl -->
+            <path class="stroke center"
+                  d="M300 270
+                     C292 268, 287 262, 289 255
+                     C291 246, 305 243, 312 251
+                     C319 259, 311 269, 300 270"
+                  fill="none" stroke-linecap="round" />
+          </svg>
+
+          <div class="message">
+            <h3 class="final-title" id="finalTitle">You just made me the happiest person alive ❤️</h3>
+            <p class="final-sub">Happy Valentine’s Day, Paige.</p>
+          </div>
+        </div>
+      </section>
+    </section>
+  </main>
+
+  <!-- Hearts burst container -->
+  <div id="heartsLayer" class="hearts-layer" aria-hidden="true"></div>
+
+  <script src="script.js"></script>
+</body>
+</html>

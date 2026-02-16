@@ -94,3 +94,25 @@ body {
   opacity: 0;
   transform: scale(1.1);
 }
+/* --- click/tap fix: invisible overlay was blocking the keypad --- */
+.vault-wrapper { position: relative; }
+
+.vault-card {
+  position: relative;
+  z-index: 2;
+}
+
+.unlocked {
+  z-index: 1;
+  pointer-events: none; /* <-- key line: prevents blocking clicks */
+}
+
+.unlocked.active {
+  pointer-events: auto;
+}
+
+/* extra safety (rare cases) */
+body::before,
+body::after {
+  pointer-events: none;
+}

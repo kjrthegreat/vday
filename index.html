@@ -2,124 +2,331 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Kyle 💘 Paige | Valentine</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>The Vault</title>
 
-  <!-- Google Fonts -->
+  <!-- Premium typography (serif headline + clean sans) -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&family=Inter:wght@400;500;600&display=swap"
+    rel="stylesheet"
+  />
 
   <link rel="stylesheet" href="styles.css" />
 </head>
+
 <body>
+  <!-- cinematic overlay used during final unlock -->
+  <div class="cinematic-overlay" id="cinematicOverlay" aria-hidden="true">
+    <canvas id="particleCanvas" width="1" height="1"></canvas>
+    <div class="glow-sweep" aria-hidden="true"></div>
+    <div class="soft-vignette" aria-hidden="true"></div>
+  </div>
 
-  <div class="bg-sparkles" aria-hidden="true"></div>
+  <header class="topbar">
+    <div class="brand">
+      <span class="brand-mark" aria-hidden="true"></span>
+      <div class="brand-text">
+        <div class="brand-title">The Vault</div>
+        <div class="brand-subtitle">a private cinematic space</div>
+      </div>
+    </div>
 
-  <main class="page">
-    <section class="card">
-
-      <header class="header fade-in" id="intro">
-        <p class="eyebrow">Valentine’s Day</p>
-        <h1 class="title">Paige, you make my world brighter every single day.</h1>
-        <p class="subtitle">I made you a tiny website… because you deserve cute things.</p>
-      </header>
-
-      <section class="question fade-in" id="questionBlock" aria-live="polite">
-        <h2 class="question-title">Will you be my Valentine?</h2>
-
-        <div class="buttons" id="buttons">
-          <button class="btn btn-primary" id="yesBtn" type="button">Yes 💗</button>
-          <button class="btn btn-ghost" id="noBtn" type="button">No 🙈</button>
+    <!-- subtle HUD (tokens + progress) -->
+    <div class="hud" aria-label="Vault progress">
+      <div class="hud-block">
+        <div class="hud-label">Sigils</div>
+        <div class="hud-sigils" id="hudSigils" aria-live="polite">
+          <span class="pill is-muted">0 / 3</span>
         </div>
+      </div>
+      <div class="hud-block">
+        <div class="hud-label">Sequence</div>
+        <div class="hud-seq" id="hudSequence">
+          <span class="pill is-muted">—</span>
+        </div>
+      </div>
+      <div class="hud-block">
+        <div class="hud-label">Memory</div>
+        <div class="hud-mem" id="hudMemory">
+          <span class="pill is-muted">locked</span>
+        </div>
+      </div>
 
-        <p class="tiny-note" id="tinyNote">Be honest… but also choose wisely 😅</p>
-      </section>
+      <button class="ghost-btn" id="attemptUnlockBtn" type="button">
+        Attempt Unlock
+      </button>
+    </div>
+  </header>
 
-      <!-- Reveal after Yes -->
-      <section class="reveal" id="reveal" hidden>
-        <div class="flower-wrap">
+  <main class="stage">
+    <!-- Hero / Parallax -->
+    <section class="hero" aria-label="Intro">
+      <div class="hero-bg" aria-hidden="true"></div>
+      <div class="hero-content">
+        <h1 class="headline">
+          A door that only opens
+          <span class="accent">the quiet way</span>.
+        </h1>
+        <p class="lead">
+          No passwords. No prompts. Just attention, pattern, and memory.
+        </p>
 
-          <svg class="flower" viewBox="0 0 600 600" role="img" aria-label="A hand-drawn flower">
-            <defs>
-              <filter id="softGlow" x="-50%" y="-50%" width="200%" height="200%">
-                <feGaussianBlur stdDeviation="3" result="blur"/>
-                <feMerge>
-                  <feMergeNode in="blur"/>
-                  <feMergeNode in="SourceGraphic"/>
-                </feMerge>
-              </filter>
-            </defs>
-
-            <!-- Stem -->
-            <path class="stroke stem" d="M300 540 C295 480, 305 430, 300 380 C292 305, 250 270, 230 240"
-                  fill="none" stroke-linecap="round" />
-
-            <!-- Leaves -->
-            <path class="stroke leaf" d="M285 430 C250 420, 225 400, 210 370 C245 370, 275 392, 292 412"
-                  fill="none" stroke-linecap="round" />
-            <path class="stroke leaf" d="M315 455 C355 448, 388 425, 410 392 C372 392, 340 415, 315 438"
-                  fill="none" stroke-linecap="round" />
-
-            <!-- Rose-ish bloom -->
-            <path class="stroke petal"
-                  d="M300 210
-                     C270 190, 240 200, 232 230
-                     C222 270, 260 295, 300 285
-                     C340 295, 378 270, 368 230
-                     C360 200, 330 190, 300 210 Z"
-                  fill="none" stroke-linejoin="round" />
-
-            <path class="stroke petal"
-                  d="M300 235
-                     C285 222, 262 226, 255 245
-                     C245 275, 275 290, 300 280
-                     C325 290, 355 275, 345 245
-                     C338 226, 315 222, 300 235 Z"
-                  fill="none" stroke-linejoin="round" />
-
-            <path class="stroke petal"
-                  d="M300 255
-                     C292 248, 280 250, 276 260
-                     C270 278, 286 290, 300 286
-                     C314 290, 330 278, 324 260
-                     C320 250, 308 248, 300 255 Z"
-                  fill="none" stroke-linejoin="round" />
-
-            <!-- Tiny center swirl -->
-            <path class="stroke center"
-                  d="M300 270
-                     C292 268, 287 262, 289 255
-                     C291 246, 305 243, 312 251
-                     C319 259, 311 269, 300 270"
-                  fill="none" stroke-linecap="round" />
-
-            <!-- Hidden message path (curved across the bloom) - widened to prevent clipping -->
-            <path id="secretPath"
-              d="M215 270 C260 235, 340 235, 385 270"
-              fill="none" />
-
-            <!-- Hidden message text (reveals on click) -->
-            <text class="secret-text" aria-hidden="true">
-              <textPath href="#secretPath" startOffset="52%" text-anchor="middle">
-                Paige, I love you ❤️
-              </textPath>
-            </text>
-
-          </svg>
-
-          <div class="message">
-            <h3 class="final-title">You just made me the happiest person alive ❤️</h3>
-            <p class="final-sub">Happy Valentine’s Day, Paige.</p>
-            <p class="hint">(Tap the flower 🌸)</p>
+        <div class="hero-row">
+          <div class="panel">
+            <div class="panel-title">Layer 1</div>
+            <div class="panel-body">
+              Find <span class="accent-soft">three sigils</span> hidden in the interface.
+              They become tokens. Nothing flashy.
+            </div>
+          </div>
+          <div class="panel">
+            <div class="panel-title">Layer 2</div>
+            <div class="panel-body">
+              A subtle constellation: <span class="accent-soft">six nodes</span>.
+              Only three matter—and only in the right order.
+            </div>
+          </div>
+          <div class="panel">
+            <div class="panel-title">Layer 3</div>
+            <div class="panel-body">
+              One personal question. A memory gate.
+              The answer is verified by <span class="accent-soft">hash</span>, not stored.
+            </div>
           </div>
         </div>
-      </section>
 
+        <div class="divider"></div>
+
+        <!-- LAYER 1: Discovery Puzzle -->
+        <section class="layer" aria-label="Layer 1 discovery puzzle">
+          <div class="layer-head">
+            <h2 class="layer-title">Discovery</h2>
+            <p class="layer-sub">
+              The Vault doesn’t ask. It <em>notices</em>.
+            </p>
+          </div>
+
+          <div class="discovery-grid">
+            <!-- (1) Hover-reveal clue + hidden sigil -->
+            <div class="card" id="hoverClueCard">
+              <div class="card-top">
+                <div class="card-kicker">Hover-reveal clue</div>
+                <div class="card-title">Velvet Detail</div>
+              </div>
+
+              <p class="card-body">
+                The ornament is only decoration… unless you linger.
+                <span class="micro">Try hovering the mark.</span>
+              </p>
+
+              <!-- the ornament looks like design; hovering reveals a whisper + clickable sigil -->
+              <div class="ornament" id="ornamentHover" aria-label="Decorative ornament">
+                <span class="ornament-core" aria-hidden="true"></span>
+                <span class="ornament-whisper" id="hoverWhisper" aria-hidden="true">
+                  there’s a shape inside the glow
+                </span>
+
+                <!-- SIGIL 1 (not obvious) -->
+                <button class="sigil sigil--hover" id="sigilHover" type="button" aria-label="Hidden sigil">
+                  <span class="sigil-glyph" aria-hidden="true">⟡</span>
+                </button>
+              </div>
+            </div>
+
+            <!-- (2) Draggable object clue -->
+            <div class="card">
+              <div class="card-top">
+                <div class="card-kicker">Draggable object clue</div>
+                <div class="card-title">The Lens</div>
+              </div>
+
+              <p class="card-body">
+                Some things only appear when you move the right object through the right place.
+              </p>
+
+              <div class="lens-stage" id="lensStage" aria-label="Lens puzzle area">
+                <div class="lens-zone" id="lensZone" aria-hidden="true"></div>
+
+                <div class="lens-spot">
+                  <div class="lens-hint">
+                    Drag the <span class="accent-soft">lens</span> over the faint seam.
+                  </div>
+
+                  <div class="lens-wrap">
+                    <div class="lens" id="lens" draggable="true" aria-label="Draggable lens">
+                      <div class="lens-glint" aria-hidden="true"></div>
+                    </div>
+                    <div class="seam" aria-hidden="true"></div>
+
+                    <!-- SIGIL 2 (revealed by lens overlap then click) -->
+                    <button class="sigil sigil--lens" id="sigilLens" type="button" aria-label="Hidden sigil">
+                      <span class="sigil-glyph" aria-hidden="true">⌁</span>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- (3) Scroll-triggered reveal clue -->
+            <div class="card">
+              <div class="card-top">
+                <div class="card-kicker">Scroll-triggered reveal clue</div>
+                <div class="card-title">Threshold</div>
+              </div>
+
+              <p class="card-body">
+                There’s a reveal that only happens when you reach a certain depth.
+                Keep going.
+              </p>
+
+              <div class="scroll-well" aria-hidden="true">
+                <div class="scroll-line"></div>
+                <div class="scroll-shimmer"></div>
+              </div>
+
+              <div class="sentinel" id="scrollSentinel" aria-hidden="true"></div>
+
+              <!-- SIGIL 3 (hidden until intersection observer triggers) -->
+              <button class="sigil sigil--scroll" id="sigilScroll" type="button" aria-label="Hidden sigil">
+                <span class="sigil-glyph" aria-hidden="true">⟠</span>
+              </button>
+            </div>
+          </div>
+        </section>
+
+        <div class="divider"></div>
+
+        <!-- LAYER 2: Pattern Sequence -->
+        <section class="layer" aria-label="Layer 2 pattern sequence">
+          <div class="layer-head">
+            <h2 class="layer-title">Constellation</h2>
+            <p class="layer-sub">
+              Six quiet stars. Three true. One correct order.
+            </p>
+          </div>
+
+          <div class="constellation">
+            <div class="constellation-frame">
+              <div class="constellation-instructions">
+                Click the nodes. Correct clicks glow with a soft chime.
+                Wrong clicks dim everything and reset quietly.
+              </div>
+
+              <div class="nodes" id="nodes" aria-label="Constellation nodes">
+                <!-- 6 subtle clickable nodes -->
+                <button class="node" type="button" data-node="1" aria-label="Node 1"></button>
+                <button class="node" type="button" data-node="2" aria-label="Node 2"></button>
+                <button class="node" type="button" data-node="3" aria-label="Node 3"></button>
+                <button class="node" type="button" data-node="4" aria-label="Node 4"></button>
+                <button class="node" type="button" data-node="5" aria-label="Node 5"></button>
+                <button class="node" type="button" data-node="6" aria-label="Node 6"></button>
+
+                <svg class="node-lines" viewBox="0 0 100 60" preserveAspectRatio="none" aria-hidden="true">
+                  <path d="M10 42 L30 14 L50 28 L70 10 L90 36" />
+                  <path d="M30 14 L70 10" />
+                  <path d="M50 28 L90 36" />
+                </svg>
+              </div>
+
+              <div class="sequence-readout">
+                <span class="label">Sequence Key</span>
+                <span class="pill" id="sequenceKeyPill">—</span>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <div class="divider"></div>
+
+        <!-- LAYER 3: Memory Gate -->
+        <section class="layer" aria-label="Layer 3 memory gate">
+          <div class="layer-head">
+            <h2 class="layer-title">Memory</h2>
+            <p class="layer-sub">
+              One question. No big form. The answer is verified by hash.
+            </p>
+          </div>
+
+          <div class="memory-gate">
+            <div class="memory-prompt">
+              <div class="memory-q" id="memoryQuestion">
+                What single word do we always come back to?
+              </div>
+
+              <div class="memory-inputline">
+                <span class="memory-caret" aria-hidden="true">▍</span>
+                <input
+                  class="memory-input"
+                  id="memoryInput"
+                  type="text"
+                  inputmode="text"
+                  autocomplete="off"
+                  spellcheck="false"
+                  aria-label="Answer prompt"
+                  placeholder="a quiet answer…"
+                />
+                <button class="ghost-btn" id="memorySubmitBtn" type="button">Verify</button>
+              </div>
+
+              <div class="memory-feedback" id="memoryFeedback" aria-live="polite"></div>
+            </div>
+          </div>
+        </section>
+
+        <div class="divider"></div>
+
+        <!-- Hidden section revealed after final unlock -->
+        <section class="universe" id="universe" aria-label="Our Universe" hidden>
+          <div class="layer-head">
+            <h2 class="layer-title">Our Universe</h2>
+            <p class="layer-sub">
+              Modular. Expandable. Add new rooms, artifacts, puzzles, and chapters.
+            </p>
+          </div>
+
+          <div class="universe-grid">
+            <article class="module-card">
+              <div class="module-title">Room I · Archive</div>
+              <div class="module-body">
+                A place to store notes, moments, screenshots, and tiny timelines.
+              </div>
+              <button class="ghost-btn" type="button">Open Module</button>
+            </article>
+
+            <article class="module-card">
+              <div class="module-title">Room II · Signals</div>
+              <div class="module-body">
+                Mini puzzles you can swap in easily. Add a new layer without rewriting the engine.
+              </div>
+              <button class="ghost-btn" type="button">Open Module</button>
+            </article>
+
+            <article class="module-card">
+              <div class="module-title">Room III · Constellations</div>
+              <div class="module-body">
+                A gallery of “keys” and sequences. You can rotate patterns weekly.
+              </div>
+              <button class="ghost-btn" type="button">Open Module</button>
+            </article>
+          </div>
+        </section>
+
+        <footer class="footer">
+          <div class="footer-inner">
+            <div class="footer-note">
+              The Vault listens for intent, not force.
+            </div>
+            <div class="footer-faint" aria-hidden="true">
+              a hush of rose-gold in the dark
+            </div>
+          </div>
+        </footer>
+
+      </div>
     </section>
   </main>
-
-  <div id="heartsLayer" class="hearts-layer" aria-hidden="true"></div>
 
   <script src="script.js"></script>
 </body>
